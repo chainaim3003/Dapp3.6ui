@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLEIF Blockchain State Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">GLEIF Blockchain State Changes Test</h1>
+        
+        <div class="bg-white rounded-lg shadow p-6 mb-6">
+            <h2 class="text-xl font-semibold mb-4">Test Blockchain State API</h2>
+            
+            <div class="space-y-4">
+                <button id="test-current-state" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Test Get Current State
+                </button>
+                
+                <button id="test-gleif-with-state" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                    Test GLEIF Execution with State Tracking
+                </button>
+            </div>
+            
+            <div id="test-results" class="mt-6 p-4 bg-gray-100 rounded hidden">
+                <h3 class="font-semibold mb-2">Test Results:</h3>
+                <pre id="results-content" class="text-sm overflow-auto"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showResults(data) {
+            const resultsDiv = document.getElementById('test-results');
+            const resultsContent = document.getElementById('results-content');
+            
+            resultsDiv.classList.remove('hidden');
+            resultsContent.textContent = JSON.stringify(data, null, 2);
+        }
+
+        document.getElementById('test-current-state').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/v1/blockchain/state');
+                const data = await response.json();
+                showResults(data);
+            } catch (error) {
+                showResults({ error: error.message });
+            }
+        });
+
+        document.getElementById('test-gleif-with-state').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/v1/tools/execute-with-state', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        toolName: 'get-GLEIF-verification-with-sign',
+                        parameters: { companyName: 'Test Company Inc.' }
+                    })
+                });
+                const data = await response.json();
+                showResults(data);
+            } catch (error) {
+                showResults({ error: error.message });
+            }
+        });
+    </script>
+</body>
+</html>
