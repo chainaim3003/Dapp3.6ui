@@ -1,0 +1,555 @@
+            transform: translateX(26px);
+        }
+        
+        /* Job queue styling */
+        .job-item {
+            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+        }
+        .job-item.completed {
+            opacity: 0.7;
+        }
+        .pulse-dot {
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 20% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+            80%, 100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Results container scrolling */
+        .results-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .results-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .results-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+        .results-container::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .results-container::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* File drop zone styling */
+        .file-drop-zone {
+            border: 2px dashed #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+            background-color: #f8fafc;
+            cursor: pointer;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .file-drop-zone:hover {
+            border-color: var(--primary-color);
+            background-color: #eff6ff;
+        }
+        .file-drop-zone.dragover {
+            border-color: var(--primary-color);
+            background-color: #dbeafe;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .file-drop-zone.has-file {
+            border-color: var(--success-color);
+            background-color: #f0fdf4;
+        }
+        .file-info {
+            display: none;
+        }
+        .file-info.show {
+            display: block;
+        }
+        .file-remove-btn {
+            color: var(--error-color);
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .file-remove-btn:hover {
+            color: #dc2626;
+        }
+
+        /* Notification animations */
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .animate-slide-in {
+            animation: slide-in 0.3s ease-out;
+        }
+        
+        .notification {
+            transition: all 0.3s ease;
+        }
+        
+        .notification:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* SCF specific styling */
+        .scf-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            border: 1px solid #c7d2fe;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* HTTP Response Display Styles - Enhanced and Positioned */
+        .http-resp-content {
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .http-resp-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .http-resp-content::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+
+        .http-resp-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .http-resp-json-viewer {
+            background: #1e293b;
+            color: #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .http-resp-json-key { color: #7dd3fc; }
+        .http-resp-json-string { color: #86efac; }
+        .http-resp-json-number { color: #fbbf24; }
+        .http-resp-json-boolean { color: #fb7185; }
+        .http-resp-json-null { color: #64748b; }
+
+        .http-resp-collapsible-header {
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        .http-resp-collapsible-header:hover {
+            background-color: #f8fafc;
+        }
+
+        .http-resp-status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .http-resp-status-2xx { background-color: #dcfce7; color: #166534; }
+        .http-resp-status-3xx { background-color: #fef3c7; color: #92400e; }
+        .http-resp-status-4xx { background-color: #fee2e2; color: #991b1b; }
+        .http-resp-status-5xx { background-color: #fecaca; color: #7f1d1d; }
+        .http-resp-status-error { background-color: #f3f4f6; color: #374151; }
+
+        /* Animation for HTTP response container appearance */
+        .http-resp-container-animated {
+            animation: slideInUp 0.3s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">ZK-PRET-WEB-APP</h1>
+                        <p class="text-sm text-gray-500">Zero-Knowledge Proofs for Regulatory Technology</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <!-- Execution Mode Toggle -->
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm font-medium text-gray-600">Sync</span>
+                        <label class="mode-toggle">
+                            <input type="checkbox" id="async-mode-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span class="text-sm font-medium text-gray-600">Async</span>
+                    </div>
+                    
+                    <!-- Job Queue Indicator -->
+                    <div id="job-queue-indicator" class="hidden flex items-center space-x-2 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full pulse-dot"></div>
+                        <span class="text-sm font-medium text-blue-700">
+                            <span id="running-jobs-count">0</span> jobs running
+                        </span>
+                    </div>
+                    
+                    <!-- Connection Status -->
+                    <div id="connection-status" class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-gray-400 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-gray-600">Connecting...</span>
+                    </div>
+                    
+                    <button id="settings-btn" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-cog text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div id="notifications" class="fixed top-4 right-4 z-50"></div>
+        
+        <div class="mb-8" id="tab-navigation">
+            <nav class="flex flex-col space-y-1 bg-white rounded-lg p-1 shadow-sm">
+                <!-- Super Tab: Compliance Prover -->
+                <div class="border-b border-gray-200 pb-2 mb-2">
+                    <button class="tab-btn super-tab active w-full px-6 py-3 text-sm font-medium rounded-md bg-blue-600 text-white" data-tab="compliance">
+                        <i class="fas fa-shield-alt mr-2"></i>Compliance Prover
+                        <span class="text-xs ml-2 bg-blue-500 px-2 py-1 rounded-full">Master Service</span>
+                    </button>
+                    
+                    <!-- Sub-tabs under Compliance Prover -->
+                    <div class="ml-6 mt-2 flex flex-wrap gap-1">
+                        <button class="tab-btn sub-tab flex-1 min-w-0 px-4 py-2 text-xs font-medium rounded-md" data-tab="corporate">
+                            <i class="fas fa-certificate mr-1"></i>Corporate Verification
+                        </button>
+                        <button class="tab-btn sub-tab flex-1 min-w-0 px-4 py-2 text-xs font-medium rounded-md" data-tab="exim">
+                            <i class="fas fa-ship mr-1"></i>EXIM Verification
+                        </button>
+                        <button class="tab-btn sub-tab flex-1 min-w-0 px-4 py-2 text-xs font-medium rounded-md" data-tab="gleif">
+                            <i class="fas fa-building mr-1"></i>GLEIF Verification
+                        </button>
+                        <button class="tab-btn sub-tab flex-1 min-w-0 px-4 py-2 text-xs font-medium rounded-md" data-tab="composed-proofs">
+                            <i class="fas fa-layer-group mr-1"></i>Composed Compliance Proofs
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Additional Service Tabs -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-1">
+                    <button class="tab-btn flex-1 px-4 py-2 text-xs font-medium rounded-md" data-tab="scf">
+                        <i class="fas fa-link mr-1 text-teal-600"></i>Supply Chain Finance
+                    </button>
+                    <button class="tab-btn flex-1 px-4 py-2 text-xs font-medium rounded-md" data-tab="risk">
+                        <i class="fas fa-chart-line mr-1 text-red-600"></i>Risk & Liquidity
+                    </button>
+                    <button class="tab-btn flex-1 px-4 py-2 text-xs font-medium rounded-md" data-tab="data-integrity">
+                        <i class="fas fa-database mr-1 text-purple-600"></i>Data Integrity
+                    </button>
+                    <button class="tab-btn flex-1 px-4 py-2 text-xs font-medium rounded-md" data-tab="process-integrity">
+                        <i class="fas fa-sitemap mr-1 text-indigo-600"></i>Process Integrity
+                    </button>
+                    <button class="tab-btn flex-1 px-4 py-2 text-xs font-medium rounded-md" data-tab="registry">
+                        <i class="fas fa-book mr-1 text-emerald-600"></i>Registry
+                    </button>
+                    <button class="tab-btn flex-1 px-4 py-2 text-xs font-medium rounded-md" data-tab="deep-composition">
+                        <i class="fas fa-brain mr-1 text-orange-600"></i>DeepComposition
+                    </button>
+                </div>
+            </nav>
+            
+            <!-- Special Mode Navigation Elements -->
+            <nav id="process-integrity-only-nav" class="hidden bg-white rounded-lg p-1 shadow-sm">
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center justify-center">
+                        <i class="fas fa-sitemap mr-3 text-indigo-600"></i>
+                        Business Process Integrity Prover
+                    </h2>
+                    <p class="text-sm text-gray-600 mt-2">Verify business process integrity using BPMN and workflow validation</p>
+                </div>
+            </nav>
+            
+            <nav id="data-integrity-only-nav" class="hidden bg-white rounded-lg p-1 shadow-sm">
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center justify-center">
+                        <i class="fas fa-database mr-3 text-purple-600"></i>
+                        Business Data Integrity Prover
+                    </h2>
+                    <p class="text-sm text-gray-600 mt-2">Prove data integrity without revealing content or structure</p>
+                </div>
+            </nav>
+            
+            <nav id="risk-only-nav" class="hidden bg-white rounded-lg p-1 shadow-sm">
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center justify-center">
+                        <i class="fas fa-chart-line mr-3 text-red-600"></i>
+                        Risk & Liquidity Prover
+                    </h2>
+                    <p class="text-sm text-gray-600 mt-2">Demonstrate compliance using ACTUS and Basel III standards</p>
+                </div>
+            </nav>
+            
+            <nav id="registry-only-nav" class="hidden bg-white rounded-lg p-1 shadow-sm">
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center justify-center">
+                        <i class="fas fa-book mr-3 text-emerald-600"></i>
+                        Registry
+                    </h2>
+                    <p class="text-sm text-gray-600 mt-2">Secure entity registration and verification with immutable records</p>
+                </div>
+            </nav>
+            
+            <nav id="scf-only-nav" class="hidden bg-white rounded-lg p-1 shadow-sm">
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center justify-center">
+                        <i class="fas fa-link mr-3 text-teal-600"></i>
+                        Supply Chain Finance Verification
+                    </h2>
+                    <p class="text-sm text-gray-600 mt-2">Verify SCF transactions including invoice financing with complete privacy</p>
+                </div>
+            </nav>
+            
+            <nav id="deep-composition-only-nav" class="hidden bg-white rounded-lg p-1 shadow-sm">
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center justify-center">
+                        <i class="fas fa-brain mr-3 text-orange-600"></i>
+                        DeepComposition Analysis
+                    </h2>
+                    <p class="text-sm text-gray-600 mt-2">Advanced AI composition analysis with zero-knowledge verification</p>
+                </div>
+            </nav>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-sm border">
+                    <!-- All tab contents remain the same as they were properly implemented -->
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Server Status -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-server mr-2 text-green-600"></i>
+                        Server Status
+                    </h3>
+                    <div id="server-status">Loading...</div>
+                </div>
+
+                <!-- Job Queue -->
+                <div id="job-queue-panel" class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center justify-between">
+                        <span>
+                            <i class="fas fa-tasks mr-2 text-blue-600"></i>
+                            Job Queue
+                        </span>
+                        <button id="clear-completed-jobs" class="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded hover:bg-gray-100 transition-colors">
+                            Clear completed
+                        </button>
+                    </h3>
+                    <div id="job-queue-list" class="space-y-2">
+                        <div class="text-center py-6 text-gray-500">
+                            <i class="fas fa-clock text-2xl mb-2 opacity-50"></i>
+                            <p class="text-sm">No jobs in queue</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Execution Results -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-clipboard-list mr-2 text-purple-600"></i>
+                        Execution Results
+                    </h3>
+                    <div id="execution-results" class="results-container">
+                        <div class="text-center py-8 text-gray-500">
+                            <i class="fas fa-play-circle text-4xl mb-4 opacity-50"></i>
+                            <p>No executions yet</p>
+                            <p class="text-sm">Select a verification tool and click execute</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HTTP Response Details - POSITIONED BELOW EXECUTION RESULTS -->
+                <div class="bg-white rounded-lg shadow-sm border p-6 http-resp-container-animated" id="http-resp-container" style="display: none;">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-exchange-alt mr-2 text-blue-600"></i>
+                            HTTP Response Details
+                            <span class="ml-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Live</span>
+                        </h3>
+                        <button onclick="window.app?.toggleHttpResponseDetails?.()" class="text-sm text-gray-500 hover:text-gray-700 flex items-center">
+                            <i class="fas fa-eye mr-1"></i>
+                            <span id="http-resp-toggle-text">Show Details</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Response Summary (Always Visible when section is shown) -->
+                    <div id="http-resp-summary" class="bg-gray-50 rounded-lg p-4 mb-4">
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Status:</span>
+                                <span id="http-resp-status" class="http-resp-status-badge">-</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Response Time:</span>
+                                <span id="http-resp-time" class="font-medium text-gray-900">-</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Size:</span>
+                                <span id="http-resp-size" class="font-medium text-gray-900">-</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600">Content-Type:</span>
+                                <span id="http-resp-content-type" class="font-medium text-gray-900">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Response (Collapsible) -->
+                    <div id="http-resp-details" class="hidden space-y-4">
+                        <!-- Details will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Recent History -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-history mr-2 text-orange-600"></i>
+                        Recent History
+                    </h3>
+                    <div id="execution-history">
+                        <div class="text-center py-4 text-gray-500">
+                            <p class="text-sm">No history available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load JavaScript modules -->
+    <script src="scf_enhancement.js"></script>
+    <script src="global-functions.js"></script>
+    
+    <!-- Load component modules -->
+    <script src="js/components/gleif.js"></script>
+    <script src="js/components/corporate.js"></script>
+    <script src="js/components/exim.js"></script>
+    <script src="js/components/scf.js"></script>
+    <script src="js/components/risk.js"></script>
+    <script src="js/components/compliance.js"></script>
+    
+    <!-- Load SCF Container modules -->
+    <script src="js/components/scf/scf-data-store.js"></script>
+    <script src="js/components/scf/scf-container.js"></script>
+    
+    <!-- Load main application -->
+    <script src="js/app.js"></script>
+    
+    <!-- Load diagnostics for debugging -->
+    <script src="diagnostics.js"></script>
+    
+    <!-- Global utility functions -->
+    <script>
+        // Global template selection
+        window.selectedComposedTemplate = null;
+        
+        function selectComposedProofTemplate(templateId) {
+            window.selectedComposedTemplate = templateId;
+            console.log('Selected template:', templateId);
+            
+            // Show selected template info
+            const selectedInfo = document.getElementById('selected-template-info');
+            const templateName = document.getElementById('selected-template-name');
+            
+            if (selectedInfo && templateName) {
+                selectedInfo.classList.remove('hidden');
+                templateName.textContent = templateId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            }
+            
+            // Notify user
+            if (window.app && window.app.showNotification) {
+                window.app.showNotification(
+                    'Template Selected',
+                    `${templateName?.textContent || templateId} composition template selected`,
+                    'info'
+                );
+            }
+        }
+        
+        async function loadAvailableTemplates() {
+            console.log('Loading available templates...');
+            
+            if (window.app && window.app.showNotification) {
+                window.app.showNotification(
+                    'Templates Loaded',
+                    'Composition templates are now available for selection',
+                    'info'
+                );
+            }
+        }
+        
+        // File management functions
+        function clearDataFile() {
+            if (window.app && window.app.clearDataFile) {
+                window.app.clearDataFile();
+            }
+        }
+        
+        function clearActualProcessFile() {
+            if (window.app && window.app.clearActualProcessFile) {
+                window.app.clearActualProcessFile();
+            }
+        }
+        
+        function clearExpectedProcessFile() {
+            if (window.app && window.app.clearExpectedProcessFile) {
+                window.app.clearExpectedProcessFile();
+            }
+        }
+        
+        function clearDeepCompositionFile() {
+            if (window.app && window.app.clearDeepCompositionFile) {
+                window.app.clearDeepCompositionFile();
+            }
+        }
+    </script>
+</body>
+</html>

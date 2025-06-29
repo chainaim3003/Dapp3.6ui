@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZK-PRET | Zero-Knowledge Proof Engine for Tokenization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">ZK-PRET</h1>
+                        <p class="text-sm text-gray-500">Zero-Knowledge Proof Engine for Tokenization</p>
+                    </div>
+                </div>
+                <button onclick="window.location.href='app.html'"
+                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-rocket mr-2"></i>Launch Platform
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-white-600 via-purple-600 to-indigo-600 text-blue py-24">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-6xl font-bold mb-8 leading-tight">
+                Next-Generation RWA Tokenization Infrastructure
+            </h1>
+            <p class="text-2xl mb-12 max-w-5xl mx-auto leading-relaxed">
+                Privacy-preserving business infrastructure for real-world asset tokenization powered by MINA blockchain.
+                Enable supply chain finance, trade analytics, and institutional DeFi with standards-based ZK proofs.
+            </p>
+
+            <!-- Key Metrics -->
+            <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200"
+                    style="background-color: white !important;">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">$16T</div>
+                    <div class="text-gray-700">Global Market Potential</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200"
+                    style="background-color: white !important;">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">8+</div>
+                    <div class="text-gray-700">Platform Services</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200"
+                    style="background-color: white !important;">
+                    <div class="text-3xl font-bold text-green-600 mb-2">99.9%</div>
+                    <div class="text-gray-700">Privacy Preserved</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-200"
+                    style="background-color: white !important;">
+                    <div class="text-3xl font-bold text-indigo-600 mb-2">24/7</div>
+                    <div class="text-gray-700">Standards Compliance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Statement -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">Bridging Web3 & Traditional Finance</h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    ZK-PRET addresses the fundamental barriers to blockchain adoption for institutions by providing
+                    privacy-protected, standards-based tokenization infrastructure that enables the next billion users
+                    to enter Web3 through practical, day-to-day business use cases.
+                </p>
+            </div>
+
+            <!-- Problem & Solution -->
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div class="bg-red-50 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-exclamation-triangle text-white text-lg"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">Current Challenges</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start"><i class="fas fa-times text-red-500 mr-3 mt-1"></i>First-generation
+                            tokenization protocols only hash off-chain documents</li>
+                        <li class="flex items-start"><i class="fas fa-times text-red-500 mr-3 mt-1"></i>Privacy concerns
+                            prevent institutional blockchain adoption</li>
+                        <li class="flex items-start"><i class="fas fa-times text-red-500 mr-3 mt-1"></i>Limited
+                            scalability for regulated real-world use cases</li>
+                        <li class="flex items-start"><i class="fas fa-times text-red-500 mr-3 mt-1"></i>Lack of
+                            standards-based business process verification</li>
+                    </ul>
+                </div>
+
+                <div class="bg-green-50 rounded-xl p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-check-circle text-white text-lg"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900">ZK-PRET Solution</h3>
+                    </div>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i>Deep
+                            composition proofs for complete data integrity</li>
+                        <li class="flex items-start"><i
+                                class="fas fa-check text-green-500 mr-3 mt-1"></i>Privacy-protected business sensitive
+                            content</li>
+                        <li class="flex items-start"><i
+                                class="fas fa-check text-green-500 mr-3 mt-1"></i>Standards-based verification (BPMN
+                            2.0, ACTUS, PEPPOL)</li>
+                        <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i>Powered by
+                            MINA blockchain for scalability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ZK-PRET Platform Services -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">ZK-PRET Platform Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+                    Access our comprehensive suite of zero-knowledge tokenization tools designed for privacy-preserving
+                    business verification and real-world asset tokenization
+                </p>
+                <div
+                    class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    Enterprise-Grade Security & Privacy
+                </div>
+            </div>
+
+            <!-- Tools Section -->
+            <div class="mb-16">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Tools</h3>
+                    <p class="text-gray-600">Core verification and compliance tools for business processes</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Compliance Prover -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-blue-300"
+                        onclick="window.location.href='compliance.html'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-shield-alt text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Compliance Prover</h4>
+                                <span class="text-xs text-blue-600 font-medium">Regulatory Verification</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Comprehensive regulatory compliance verification for GLEIF, Corporate, and EXIM.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-blue-600 font-medium text-sm hover:text-blue-700">
+                                Explore Services →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">3 Services</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Process Integrity Prover -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-indigo-300"
+                        onclick="openApp('process-integrity')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-sitemap text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Business Process Integrity Prover</h4>
+                                <span class="text-xs text-indigo-600 font-medium">Business Process</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Verify business process integrity using BPMN and workflow validation.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-indigo-600 font-medium text-sm hover:text-indigo-700">
+                                Start Verification →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">BPMN</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Data Integrity Prover -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-purple-300"
+                        onclick="openApp('data-integrity')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-database text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Business Data Integrity Prover</h4>
+                                <span class="text-xs text-purple-600 font-medium">Business Intelligence</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Prove data integrity without revealing content or structure.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-purple-600 font-medium text-sm hover:text-purple-700">
+                                Start Verification →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Data</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Risk & Liquidity Prover -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-red-300"
+                        onclick="openApp('risk')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-chart-line text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Risk & Liquidity Prover</h4>
+                                <span class="text-xs text-red-600 font-medium">Financial Assessment</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Demonstrate compliance using ACTUS and Basel III standards.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-red-600 font-medium text-sm hover:text-red-700">
+                                Start Verification →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Risk</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Tools Section -->
+            <div class="mb-16">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Advanced Tools</h3>
+                    <p class="text-gray-600">Sophisticated AI-powered analysis and registry management tools</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <!-- Registry -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-emerald-300"
+                        onclick="openApp('registry')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-emerald-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-book text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Registry</h4>
+                                <span class="text-xs text-emerald-600 font-medium">Entity Registry</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Secure entity registration and verification with immutable records.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-emerald-600 font-medium text-sm hover:text-emerald-700">
+                                Access Registry →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Registry</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DeepComposition -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-orange-300"
+                        onclick="openApp('deep-composition')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-brain text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">DeepComposition</h4>
+                                <span class="text-xs text-orange-600 font-medium">AI-Powered Analysis</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Advanced AI composition analysis with zero-knowledge verification.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-orange-600 font-medium text-sm hover:text-orange-700">
+                                Start Analysis →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">AI/ML</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <div class="mb-16">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Applications</h3>
+                    <p class="text-gray-600">Complete business applications built on ZK-PRET infrastructure</p>
+                </div>
+                
+                <!-- Supply Chain Finance Information -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-200 shadow-md max-w-6xl mx-auto">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-info-circle text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-gray-900 mb-3">Supply Chain Finance Information</h4>
+                        <p class="text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                            Learn more about our comprehensive Supply Chain Finance capabilities and market impact
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 items-center mb-8">
+                        <div>
+                            <h5 class="text-xl font-bold text-gray-900 mb-4">Supply Chain Finance Reference Implementation</h5>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                SCF-RWA-Reimagined demonstrates ZK-PRET's capabilities for supply chain finance,
+                                including international trade finance and insurance. This implementation produces
+                                layers of proof composition to reduce validation risk for financiers.
+                            </p>
+
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-teal-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-users text-teal-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-gray-900 text-sm">MSME Empowerment</h6>
+                                        <p class="text-gray-600 text-sm">Enables small businesses to prove creditworthiness without exposing sensitive data</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-teal-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-shield-alt text-teal-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-gray-900 text-sm">Privacy-First Finance</h6>
+                                        <p class="text-gray-600 text-sm">Maintain business confidentiality while proving compliance</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="w-6 h-6 bg-teal-100 rounded-lg flex items-center justify-center mr-3 mt-1">
+                                        <i class="fas fa-globe text-teal-600 text-sm"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-semibold text-gray-900 text-sm">Global Trade Ready</h6>
+                                        <p class="text-gray-600 text-sm">Support for international trade corridors and regulatory frameworks</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-sm">
+                            <div class="text-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                    <i class="fas fa-chart-area text-white text-lg"></i>
+                                </div>
+                                <h5 class="text-lg font-bold text-gray-900 mb-1">Market Impact</h5>
+                                <p class="text-gray-600 text-sm">Addressing critical financing gaps in global trade</p>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-teal-600 mb-1">$2-3T</div>
+                                    <div class="text-xs text-gray-600">International Trade Demand</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-600 mb-1">$16T</div>
+                                    <div class="text-xs text-gray-600">Total Market Potential</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-purple-600 mb-1">SME</div>
+                                    <div class="text-xs text-gray-600">Primary Beneficiaries</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-indigo-600 mb-1">Global</div>
+                                    <div class="text-xs text-gray-600">Multi-Jurisdiction</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Supply Chain Finance Application Card -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-100 hover:border-teal-300 max-w-2xl mx-auto"
+                        onclick="openApp('scf')">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-teal-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-link text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-gray-900">Supply Chain Finance</h4>
+                                <span class="text-xs text-teal-600 font-medium">Financial Verification</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Verify SCF transactions including invoice financing with complete privacy.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-teal-600 font-medium text-sm hover:text-teal-700">
+                                Start Verification →
+                            </span>
+                            <div class="flex items-center space-x-1">
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">SCF</span>
+                                <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">✓ ZK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-bold">ZK-PRET</span>
+                            <span class="text-gray-400 ml-2">RegTech Platform</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 max-w-md leading-relaxed">
+                        Privacy-preserving business infrastructure for real-world asset tokenization. Enabling the next
+                        billion users to enter Web3 through practical supply chain finance and institutional DeFi use
+                        cases.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Platform Services</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li><a href="#" onclick="openApp('gleif')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-building w-4 mr-2"></i>GLEIF Verification</a></li>
+                        <li><a href="#" onclick="openApp('corporate')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-certificate w-4 mr-2"></i>Corporate Registration</a></li>
+                        <li><a href="#" onclick="openApp('scf')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-link w-4 mr-2"></i>Supply Chain Finance</a></li>
+                        <li><a href="#" onclick="openApp('exim')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-ship w-4 mr-2"></i>EXIM Verification</a></li>
+                        <li><a href="#" onclick="openApp('risk')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-chart-line w-4 mr-2"></i>Risk & Liquidity Prover</a></li>
+                        <li><a href="#" onclick="openApp('deep-composition')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-brain w-4 mr-2"></i>DeepComposition</a></li>
+                        <li><a href="#" onclick="openApp('registry')"
+                                class="hover:text-white transition-colors cursor-pointer flex items-center"><i
+                                    class="fas fa-book w-4 mr-2"></i>Registry</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4 text-white">Technology Stack</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center"><i class="fas fa-layer-group w-4 mr-2"></i>MINA Blockchain</li>
+                        <li class="flex items-center"><i class="fas fa-lock w-4 mr-2"></i>Zero-Knowledge Proofs</li>
+                        <li class="flex items-center"><i class="fas fa-sitemap w-4 mr-2"></i>BPMN 2.0 Standards</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line w-4 mr-2"></i>ACTUS Framework</li>
+                        <li class="flex items-center"><i class="fas fa-database w-4 mr-2"></i>Standards-Based APIs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 ZK-PRET by ChainAim. Powered by MINA Protocol. Built for institutional tokenization.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Terms of
+                            Service</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Documentation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openApp(tab = '') {
+            if (tab) {
+                sessionStorage.setItem('zkpret_target_tab', tab);
+            }
+            window.location.href = 'app.html';
+        }
+    </script>
+</body>
+
+</html>

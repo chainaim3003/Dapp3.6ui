@@ -1,0 +1,101 @@
+{
+  "financierTypes": {
+    "traditional_bank": {
+      "name": "Traditional Bank",
+      "description": "Conservative banking institutions",
+      "weightage": {
+        "compliance": {
+          "corporate": 25,
+          "gleif": 20,
+          "exim": 15
+        },
+        "businessIntegrity": 15,
+        "processIntegrity": 10,
+        "riskAssessment": {
+          "companyRisk": 10,
+          "invoiceRisk": 5
+        }
+      },
+      "thresholds": {
+        "minimumScore": 75,
+        "riskTolerance": "low"
+      }
+    },
+    "fintech_lender": {
+      "name": "FinTech Lender", 
+      "description": "Technology-driven financial services",
+      "weightage": {
+        "compliance": {
+          "corporate": 20,
+          "gleif": 15,
+          "exim": 10
+        },
+        "businessIntegrity": 20,
+        "processIntegrity": 20,
+        "riskAssessment": {
+          "companyRisk": 10,
+          "invoiceRisk": 5
+        }
+      },
+      "thresholds": {
+        "minimumScore": 65,
+        "riskTolerance": "medium"
+      }
+    },
+    "alternative_finance": {
+      "name": "Alternative Finance",
+      "description": "Non-traditional financing solutions",
+      "weightage": {
+        "compliance": {
+          "corporate": 15,
+          "gleif": 10,
+          "exim": 10
+        },
+        "businessIntegrity": 25,
+        "processIntegrity": 25,
+        "riskAssessment": {
+          "companyRisk": 10,
+          "invoiceRisk": 5
+        }
+      },
+      "thresholds": {
+        "minimumScore": 55,
+        "riskTolerance": "high"
+      }
+    }
+  },
+  "scoringRules": {
+    "compliance": {
+      "corporate": {
+        "verified": 100,
+        "unverified": 0
+      },
+      "gleif": {
+        "verified": 100,
+        "unverified": 0
+      },
+      "exim": {
+        "verified": 100,
+        "unverified": 0
+      }
+    },
+    "businessIntegrity": {
+      "high": 100,
+      "medium": 70,
+      "low": 30,
+      "failed": 0
+    },
+    "processIntegrity": {
+      "compliant": 100,
+      "minor_issues": 80,
+      "major_issues": 40,
+      "non_compliant": 0
+    },
+    "riskAssessment": {
+      "low_risk": 100,
+      "medium_risk": 70,
+      "high_risk": 30,
+      "very_high_risk": 0
+    }
+  }
+}
