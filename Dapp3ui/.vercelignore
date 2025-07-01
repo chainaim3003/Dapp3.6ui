@@ -1,0 +1,17 @@
+node_modules
+.env
+.env.local
+*.log
+.git
+.DS_Store
+coverage/
+# Keep dist files for deployment
+# dist/
+# Keep source for building on Vercel
+# src/
+scripts/
+*.md
+.gitignore
+# Keep TypeScript config for Vercel build
+# tsconfig.json
+start-*.bat

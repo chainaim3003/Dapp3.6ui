@@ -30,7 +30,11 @@
     "test-composed-proofs-quick": "node test-composed-proofs.js --quick",
     "enable-async": "scripts\\enable-async.bat",
     "disable-async": "scripts\\disable-async.bat",
-    "test-compatibility": "scripts\\test-compatibility.bat"
+    "test-compatibility": "scripts\\test-compatibility.bat",
+    "vercel-build": "npm run build",
+    "vercel-dev": "npm run dev",
+    "deploy": "vercel --prod",
+    "deploy-preview": "vercel"
   },
   "keywords": [
     "zero-knowledge",

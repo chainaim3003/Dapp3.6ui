@@ -1,0 +1,58 @@
+{
+  "version": 2,
+  "name": "zk-pret-web-app",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node@3"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/dist/server.js"
+    },
+    {
+      "src": "/ws",
+      "dest": "/dist/server.js"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ],
+  "functions": {
+    "dist/server.js": {
+      "runtime": "@vercel/node@3",
+      "memory": 1024,
+      "maxDuration": 300
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "ZK_PRET_SERVER_TYPE": "http"
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+  ]
+}
