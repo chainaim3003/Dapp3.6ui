@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "zk-pret-web-app",
+  "name": "zkpretui",
   "outputDirectory": "public",
   "rewrites": [
     {
@@ -10,11 +10,18 @@
   ],
   "env": {
     "NODE_ENV": "production",
-    "ZK_PRET_SERVER_TYPE": "http"
+    "OPERATION_MODE": "HTTP",
+    "ZK_PRET_SERVER_URL": "https://zkpretserver.vercel.app",
+    "ZK_PRET_HTTP_SERVER_URL": "https://zkpretserver.vercel.app",
+    "HTTP_SERVER_URL": "https://zkpretserver.vercel.app",
+    "CORS_ORIGIN": "https://zkpretui.vercel.app",
+    "ENABLE_ASYNC_JOBS": "false",
+    "ENABLE_WEBSOCKETS": "false",
+    "ZK_PRET_SERVER_TIMEOUT": "30000"
   },
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
@@ -30,5 +37,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 30
+    }
+  }
 }

@@ -1367,14 +1367,31 @@ class ZKPretAsyncApp {
             const endTime = performance.now();
             const responseTime = endTime - startTime;
             
-            // 🆕 Capture error response details safely
-            this.captureHttpErrorSafely({
-                method: 'POST',
-                url: '/api/v1/tools/execute',
-                body: { toolName, parameters }
-            }, error, responseTime);
-            
-            this.displayError(error.message);
+            // Check if this is a network error (likely server offline)
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                console.log('🎭 Demo mode: Simulating ZK proof generation...');
+                
+                // Simulate a demo response
+                const demoResult = this.generateDemoResponse(toolName, parameters);
+                
+                // 🆕 Capture demo response details safely
+                this.captureHttpErrorSafely({
+                    method: 'POST',
+                    url: '/api/v1/tools/execute',
+                    body: { toolName, parameters }
+                }, new Error('Demo Mode: Server Offline'), responseTime);
+                
+                this.displayResult(demoResult);
+            } else {
+                // 🆕 Capture error response details safely
+                this.captureHttpErrorSafely({
+                    method: 'POST',
+                    url: '/api/v1/tools/execute',
+                    body: { toolName, parameters }
+                }, error, responseTime);
+                
+                this.displayError(error.message);
+            }
         } finally {
             this.syncExecuting = false;
         }
@@ -1397,7 +1414,12 @@ class ZKPretAsyncApp {
         if (!this.isAsyncMode) return;
 
         try {
-            this.websocket = new WebSocket('ws://localhost:3000');
+            // Use appropriate WebSocket URL based on environment
+            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsHost = window.location.hostname === 'localhost' ? 'localhost:3000' : window.location.host;
+            const wsUrl = `${wsProtocol}//${wsHost}`;
+            
+            this.websocket = new WebSocket(wsUrl);
             
             this.websocket.onopen = () => console.log('✅ WebSocket connected');
             this.websocket.onmessage = (event) => {

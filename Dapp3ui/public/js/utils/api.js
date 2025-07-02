@@ -1,6 +1,7 @@
 // ZK-PRET API utilities
 const zkpretAPI = {
-    baseURL: 'http://localhost:3000',  // Changed from 8080 to 3000
+    // Use relative URLs in production, localhost in development
+    baseURL: window.location.hostname === 'localhost' ? 'http://localhost:3000' : '',
     
     async healthCheck() {
         try {
