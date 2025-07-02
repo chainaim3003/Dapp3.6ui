@@ -8,22 +8,18 @@
       "maxDuration": 300
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/server.js"
+      "source": "/api/(.*)",
+      "destination": "/dist/server.js"
     },
     {
-      "src": "/ws",
-      "dest": "/dist/server.js"
+      "source": "/ws",
+      "destination": "/dist/server.js"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/public/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "source": "/static/(.*)",
+      "destination": "/public/$1"
     }
   ],
   "env": {
