@@ -1,12 +1,13 @@
 {
   "version": 2,
   "name": "zk-pret-web-app",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node@3"
+  "functions": {
+    "dist/server.js": {
+      "runtime": "@vercel/node@3",
+      "memory": 1024,
+      "maxDuration": 300
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/(.*)",
@@ -25,13 +26,6 @@
       "dest": "/public/$1"
     }
   ],
-  "functions": {
-    "dist/server.js": {
-      "runtime": "@vercel/node@3",
-      "memory": 1024,
-      "maxDuration": 300
-    }
-  },
   "env": {
     "NODE_ENV": "production",
     "ZK_PRET_SERVER_TYPE": "http"
