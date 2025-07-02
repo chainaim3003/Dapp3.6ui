@@ -1,25 +1,17 @@
 {
   "version": 2,
   "name": "zk-pret-web-app",
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
   "functions": {
-    "dist/server.js": {
-      "runtime": "@vercel/node@3",
-      "memory": 1024,
-      "maxDuration": 300
+    "api/index.js": {
+      "runtime": "nodejs18.x"
     }
   },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/dist/server.js"
-    },
-    {
-      "source": "/ws",
-      "destination": "/dist/server.js"
-    },
-    {
-      "source": "/static/(.*)",
-      "destination": "/public/$1"
+      "destination": "/api/index.js"
     }
   ],
   "env": {
