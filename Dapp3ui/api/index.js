@@ -1,9 +1,5 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
+const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
@@ -60,4 +56,4 @@ app.use('/api/*', (req, res) => {
 });
 
 // Export the Express app as a Vercel serverless function
-export default app;
+module.exports = app;
