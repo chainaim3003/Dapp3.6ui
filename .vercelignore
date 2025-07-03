@@ -10,5 +10,4 @@ scripts
 config
 *.md
 .gitignore
-tsconfig.json
 *.bat
