@@ -5,7 +5,6 @@ node_modules
 *.log
 .git
 dist
-src
 scripts
 config
 *.md
