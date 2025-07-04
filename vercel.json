@@ -1,14 +1,10 @@
 {
   "version": 2,
-  "name": "zk-pret-frontend",
+  "cleanUrls": true,
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "/api/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/public/index.html"
     }
   ],
   "env": {
