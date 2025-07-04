@@ -15,7 +15,7 @@ try {
   ModeDetector.validateAsyncOnlyMode();
   logger.info('✅ Async-only mode validation passed');
 } catch (error) {
-  logger.error('❌ Invalid mode configuration:', error.message);
+  logger.error('❌ Invalid mode configuration:', (error as Error).message);
   process.exit(1);
 }
 
