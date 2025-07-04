@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "npx tsc",
     "start": "cross-env OPERATION_MODE=HTTP ENABLE_ASYNC_JOBS=true ENABLE_DEMO_MODE=false node dist/async-server.js",
     "dev": "cross-env OPERATION_MODE=HTTP ENABLE_ASYNC_JOBS=true ENABLE_DEMO_MODE=false tsx watch src/async-server.ts",
     "clean": "rm -rf dist",
@@ -13,7 +13,7 @@
     
     "dev:async-only": "cross-env OPERATION_MODE=HTTP ENABLE_ASYNC_JOBS=true ENABLE_DEMO_MODE=false tsx watch src/async-server.ts",
     "start:async-only": "cross-env OPERATION_MODE=HTTP ENABLE_ASYNC_JOBS=true ENABLE_DEMO_MODE=false node dist/async-server.js",
-    "vercel-build": "npm run build",
+    "vercel-build": "npx tsc",
     "vercel-dev": "cross-env NODE_ENV=development OPERATION_MODE=HTTP ENABLE_ASYNC_JOBS=true ENABLE_DEMO_MODE=false tsx watch src/async-server.ts",
     
     "dev:http": "cross-env OPERATION_MODE=HTTP tsx watch src/server.ts",
