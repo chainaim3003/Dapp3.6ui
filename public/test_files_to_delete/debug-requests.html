@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZK-PRET Request Monitor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .request-log {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">ZK-PRET Request Monitor</h1>
+        
+        <!-- Controls -->
+        <div class="bg-white p-6 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-4">Test Controls</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button onclick="testDataIntegrity()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    Test Data Integrity (actualBL1.json)
+                </button>
+                <button onclick="testDataIntegrityValid()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    Test Data Integrity (actualBL1-VALID.json)
+                </button>
+                <button onclick="clearLogs()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Clear Logs
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-semibold text-gray-700">Total Requests</h3>
+                <p id="totalRequests" class="text-2xl font-bold text-blue-600">0</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-semibold text-gray-700">Successful</h3>
+                <p id="successRequests" class="text-2xl font-bold text-green-600">0</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-semibold text-gray-700">Failed</h3>
+                <p id="failedRequests" class="text-2xl font-bold text-red-600">0</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-semibold text-gray-700">WebSocket Status</h3>
+                <p id="wsStatus" class="text-2xl font-bold text-gray-600">Disconnected</p>
+            </div>
+        </div>
+
+        <!-- Request Log -->
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-4">Request Log</h2>
+            <div id="requestLog" class="request-log space-y-2">
+                <!-- Requests will be logged here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let requestCount = 0;
+        let successCount = 0;
+        let failedCount = 0;
+        let ws = null;
+
+        // Initialize WebSocket connection
+        function initWebSocket() {
+            try {
+                ws = new WebSocket('ws://localhost:3000');
+                
+                ws.onopen = function() {
+                    updateWSStatus('Connected', 'text-green-600');
+                    logRequest('WebSocket', 'CONNECTED', 'WebSocket connection established', true);
+                };
+                
+                ws.onmessage = function(event) {
+                    const data = JSON.parse(event.data);
+                    logRequest('WebSocket', 'MESSAGE', `Type: ${data.type}`, true);
+                };
+                
+                ws.onclose = function() {
+                    updateWSStatus('Disconnected', 'text-red-600');
+                    logRequest('WebSocket', 'DISCONNECTED', 'WebSocket connection closed', false);
+                };
+                
+                ws.onerror = function(error) {
+                    updateWSStatus('Error', 'text-red-600');
+                    logRequest('WebSocket', 'ERROR', error.toString(), false);
+                };
+            } catch (error) {
+                updateWSStatus('Error', 'text-red-600');
+                logRequest('WebSocket', 'ERROR', error.toString(), false);
+            }
+        }
+
+        function updateWSStatus(status, className) {
+            const wsStatusEl = document.getElementById('wsStatus');
+            wsStatusEl.textContent = status;
+            wsStatusEl.className = `text-2xl font-bold ${className}`;
+        }
+
+        function logRequest(method, endpoint, details, success) {
+            requestCount++;
+            if (success) {
+                successCount++;
+            } else {
+                failedCount++;
+            }
+            
+            updateStats();
+            
+            const logEl = document.getElementById('requestLog');
+            const timestamp = new Date().toLocaleTimeString();
+            const statusClass = success ? 'text-green-600' : 'text-red-600';
+            const statusText = success ? 'SUCCESS' : 'FAILED';
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'border-l-4 border-gray-300 pl-4 py-2';
+            logEntry.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="font-semibold">${method}</span>
+                        <span class="mx-2">→</span>
+                        <span class="font-mono text-sm">${endpoint}</span>
+                        <span class="ml-4 ${statusClass} font-semibold">${statusText}</span>
+                    </div>
+                    <span class="text-gray-500 text-sm">${timestamp}</span>
+                </div>
+                <div class="text-gray-600 text-sm mt-1">${details}</div>
+            `;
+            
+            logEl.insertBefore(logEntry, logEl.firstChild);
+        }
+
+        function updateStats() {
+            document.getElementById('totalRequests').textContent = requestCount;
+            document.getElementById('successRequests').textContent = successCount;
+            document.getElementById('failedRequests').textContent = failedCount;
+        }
+
+        async function makeRequest(url, method, body) {
+            const startTime = Date.now();
+            
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: body ? JSON.stringify(body) : undefined
+                });
+                
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    logRequest(method, url, `Duration: ${duration}ms`, true);
+                    return result;
+                } else {
+                    logRequest(method, url, `Error: ${result.error || 'Unknown error'} (${duration}ms)`, false);
+                    throw new Error(result.error || 'Request failed');
+                }
+            } catch (error) {
+                const endTime = Date.now();
+                const duration = endTime - startTime;
+                logRequest(method, url, `Error: ${error.message} (${duration}ms)`, false);
+                throw error;
+            }
+        }
+
+        async function testDataIntegrity() {
+            const body = {
+                toolName: 'get-BSDI-compliance-verification',
+                parameters: {
+                    command: 'node ./build/tests/with-sign/BusinessStandardDataIntegrityVerificationTest.js',
+                    dataType: 'DCSA-BillofLading-V3',
+                    filePath: './src/data/SCF/BILLOFLADING/actualBL1.json',
+                    typeOfNet: 'TESTNET'
+                }
+            };
+            
+            try {
+                const result = await makeRequest('/api/v1/tools/execute', 'POST', body);
+                console.log('Test result:', result);
+            } catch (error) {
+                console.error('Test failed:', error);
+            }
+        }
+
+        async function testDataIntegrityValid() {
+            const body = {
+                toolName: 'get-BSDI-compliance-verification',
+                parameters: {
+                    command: 'node ./build/tests/with-sign/BusinessStandardDataIntegrityVerificationTest.js',
+                    dataType: 'DCSA-BillofLading-V3',
+                    filePath: './src/data/SCF/BILLOFLADING/actualBL1-VALID.json',
+                    typeOfNet: 'TESTNET'
+                }
+            };
+            
+            try {
+                const result = await makeRequest('/api/v1/tools/execute', 'POST', body);
+                console.log('Test result:', result);
+            } catch (error) {
+                console.error('Test failed:', error);
+            }
+        }
+
+        function clearLogs() {
+            document.getElementById('requestLog').innerHTML = '';
+            requestCount = 0;
+            successCount = 0;
+            failedCount = 0;
+            updateStats();
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            initWebSocket();
+            
+            // Test server connectivity
+            makeRequest('/api/v1/health', 'GET').then(result => {
+                console.log('Server health check:', result);
+            }).catch(error => {
+                console.error('Server health check failed:', error);
+            });
+        };
+    </script>
+</body>
+</html>

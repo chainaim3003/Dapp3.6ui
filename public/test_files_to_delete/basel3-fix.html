@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basel III Quick Fix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-4">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">🔧 Basel III Quick Fix Tool</h1>
+        
+        <div class="space-y-4">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h2 class="font-semibold text-blue-900 mb-2">Quick Diagnostic</h2>
+                <button id="diagnose" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    🔍 Run Diagnosis
+                </button>
+            </div>
+            
+            <div id="results" class="hidden">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-green-900 mb-2">✅ Fix Applied Successfully!</h3>
+                    <p class="text-green-800">The Basel III tab should now load properly.</p>
+                    <a href="/app.html" class="inline-block mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                        🔄 Return to Main App
+                    </a>
+                </div>
+            </div>
+            
+            <div id="manual-steps" class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <h3 class="font-semibold text-yellow-900 mb-2">📋 Manual Steps to Fix</h3>
+                <ol class="list-decimal list-inside text-yellow-800 space-y-1 text-sm">
+                    <li>Make sure your server is running: <code class="bg-yellow-200 px-1 rounded">npm run dev</code></li>
+                    <li>Open browser console (F12) and check for errors</li>
+                    <li>Navigate to Risk & Liquidity tab</li>
+                    <li>Look for console messages starting with 🔄, ✅, or ❌</li>
+                    <li>If errors persist, restart server and clear browser cache</li>
+                </ol>
+            </div>
+            
+            <div id="console-output" class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <h3 class="font-semibold text-gray-900 mb-2">🖥️ Console Output</h3>
+                <div id="console-log" class="bg-black text-green-400 p-3 rounded font-mono text-sm max-h-64 overflow-y-auto">
+                    Waiting for diagnosis...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const consoleLog = document.getElementById('console-log');
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            consoleLog.innerHTML += `[${timestamp}] ${message}\n`;
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+        
+        async function runDiagnosis() {
+            log('🚀 Starting Basel III diagnosis...');
+            
+            // Clear previous results
+            document.getElementById('results').classList.add('hidden');
+            consoleLog.innerHTML = '';
+            
+            try {
+                // Test 1: Check server connectivity
+                log('📡 Testing server connectivity...');
+                const healthResponse = await fetch('/api/v1/health');
+                if (healthResponse.ok) {
+                    log('✅ Server is running and responding');
+                } else {
+                    log('❌ Server health check failed');
+                    return;
+                }
+                
+                // Test 2: Check Basel III API
+                log('🔍 Testing Basel III API endpoint...');
+                const apiResponse = await fetch('/api/v1/basel3-config-files');
+                
+                if (apiResponse.ok) {
+                    const data = await apiResponse.json();
+                    log(`✅ Basel III API working - Found ${data.count} files`);
+                    log(`📁 Files: ${data.files.join(', ')}`);
+                } else {
+                    const errorText = await apiResponse.text();
+                    log(`❌ Basel III API error: ${errorText}`);
+                    log('🔧 This indicates a server configuration issue');
+                    return;
+                }
+                
+                // Test 3: Check if RiskComponent is available
+                log('🔍 Checking RiskComponent availability...');
+                
+                // Load the risk component script if not already loaded
+                if (typeof window.RiskComponent === 'undefined') {\n                    log('⚠️ RiskComponent not loaded, attempting to load...');\n                    await loadScript('/js/components/risk.js');\n                    \n                    if (typeof window.RiskComponent !== 'undefined') {\n                        log('✅ RiskComponent loaded successfully');\n                    } else {\n                        log('❌ Failed to load RiskComponent');\n                        return;\n                    }\n                } else {\n                    log('✅ RiskComponent already available');\n                }\n                \n                // Test 4: Try to create risk component instance\n                log('🔧 Testing RiskComponent initialization...');\n                \n                // Create a temporary div for testing\n                const testDiv = document.createElement('div');\n                testDiv.id = 'risk-content';\n                testDiv.style.display = 'none';\n                document.body.appendChild(testDiv);\n                \n                try {\n                    const riskComponent = new window.RiskComponent();\n                    log('✅ RiskComponent instance created successfully');\n                    \n                    // Clean up test div\n                    document.body.removeChild(testDiv);\n                    \n                    log('🎉 All tests passed! Basel III should be working now.');\n                    document.getElementById('results').classList.remove('hidden');\n                    \n                } catch (componentError) {\n                    log(`❌ RiskComponent initialization failed: ${componentError.message}`);\n                    document.body.removeChild(testDiv);\n                }\n                \n            } catch (error) {\n                log(`❌ Diagnosis failed: ${error.message}`);\n            }\n        }\n        \n        function loadScript(src) {\n            return new Promise((resolve, reject) => {\n                const script = document.createElement('script');\n                script.src = src;\n                script.onload = resolve;\n                script.onerror = reject;\n                document.head.appendChild(script);\n            });\n        }\n        \n        document.getElementById('diagnose').addEventListener('click', runDiagnosis);\n    </script>\n</body>\n</html>

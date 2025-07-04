@@ -1,0 +1,14 @@
+node_modules
+.env
+.env.local
+.env.example
+*.log
+.git
+dist
+src
+scripts
+config
+*.md
+.gitignore
+tsconfig.json
+*.bat

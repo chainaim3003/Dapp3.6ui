@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Response Debug - ZK-PRET</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .success { border-left: 4px solid #10b981; }
+        .info { border-left: 4px solid #3b82f6; }
+        .warning { border-left: 4px solid #f59e0b; }
+        .error { border-left: 4px solid #ef4444; }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .output {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .step {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .step h4 {
+            margin: 0 0 10px 0;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐛 HTTP Response Debug Panel</h1>
+    
+    <div class="debug-panel info">
+        <h2>📋 Debug Instructions</h2>
+        <p>Use this page to debug HTTP response display issues in your ZK-PRET application.</p>
+        <p><strong>Open this page in the same browser where your ZK-PRET app is running.</strong></p>
+    </div>
+
+    <div class="debug-panel">
+        <h2>🔧 Quick Actions</h2>
+        <button onclick="checkApp()">1. Check App Status</button>
+        <button onclick="debugHttpResponse()">2. Debug HTTP Response</button>
+        <button onclick="triggerHttpResponse()">3. Force Show Container</button>
+        <button onclick="testExecution()">4. Test Execution Flow</button>
+        <button onclick="clearOutput()">Clear Output</button>
+    </div>
+
+    <div class="debug-panel">
+        <h2>📊 Debug Output</h2>
+        <div id="output" class="output">Click a debug button to see output...</div>
+    </div>
+
+    <div class="debug-panel">
+        <h2>📝 Step-by-Step Debugging</h2>
+        
+        <div class="step">
+            <h4>Step 1: Check if ZK-PRET app is running</h4>
+            <p>Make sure your ZK-PRET application (app.html) is open in another tab.</p>
+            <button onclick="checkApp()">Check App</button>
+        </div>
+
+        <div class="step">
+            <h4>Step 2: Execute a verification tool</h4>
+            <p>Go to your ZK-PRET app and execute any tool (GLEIF, Corporate, etc.).</p>
+            <p>After execution, come back here and check HTTP response status.</p>
+            <button onclick="debugHttpResponse()">Check HTTP Response Status</button>
+        </div>
+
+        <div class="step">
+            <h4>Step 3: Force display HTTP response container</h4>
+            <p>If the container isn't showing, try forcing it to appear.</p>
+            <button onclick="triggerHttpResponse()">Force Show Container</button>
+        </div>
+
+        <div class="step">
+            <h4>Step 4: Check browser console</h4>
+            <p>Open browser console (F12) in your ZK-PRET app and look for:</p>
+            <ul>
+                <li>📊 HTTP response capture messages</li>
+                <li>🔍 Container visibility messages</li>
+                <li>❌ Any error messages</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="debug-panel warning">
+        <h2>⚠️ Common Issues</h2>
+        <ul>
+            <li><strong>Container not found:</strong> HTTP response container missing from DOM</li>
+            <li><strong>No response data:</strong> HTTP requests not being captured</li>
+            <li><strong>Container not showing:</strong> Display logic not working</li>
+            <li><strong>Script not loaded:</strong> Fix script not loading properly</li>
+        </ul>
+    </div>
+
+    <script>
+        let output = document.getElementById('output');
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const prefix = type === 'error' ? '❌' : type === 'success' ? '✅' : type === 'warning' ? '⚠️' : 'ℹ️';
+            output.textContent += `[${timestamp}] ${prefix} ${message}\n`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function clearOutput() {
+            output.textContent = '';
+        }
+
+        function checkApp() {
+            log('Checking ZK-PRET app status...');
+            
+            // Try to access the app in other windows/tabs
+            try {
+                // Check if app is available globally
+                if (window.app) {
+                    log('✅ ZK-PRET app found in this window', 'success');
+                    log(`App version: ${window.app.constructor.name}`);
+                    log(`HTTP Response enabled: ${window.app.httpResponseEnabled}`);
+                    return;
+                }
+
+                // Check if global debug functions are available
+                if (window.debugHttpResponse) {
+                    log('✅ Debug functions available', 'success');
+                } else {
+                    log('❌ Debug functions not available', 'error');
+                }
+
+                // Check if we can access via localStorage/sessionStorage
+                const appData = localStorage.getItem('zkpret_app_data');
+                if (appData) {
+                    log('Found app data in localStorage', 'info');
+                } else {
+                    log('No app data in localStorage', 'warning');
+                }
+
+                log('ℹ️ Please ensure ZK-PRET app.html is open in another tab', 'info');
+                
+            } catch (error) {
+                log(`Error checking app: ${error.message}`, 'error');
+            }
+        }
+
+        function debugHttpResponse() {
+            log('Debugging HTTP response status...');
+            
+            try {
+                if (window.debugHttpResponse) {
+                    log('Using global debug function...', 'info');
+                    window.debugHttpResponse();
+                } else if (window.app && window.app.debugHttpResponse) {
+                    log('Using app debug function...', 'info');
+                    window.app.debugHttpResponse();
+                } else {
+                    log('Debug function not available', 'error');
+                    log('Try opening browser console in your ZK-PRET app and run: debugHttpResponse()', 'info');
+                }
+
+                // Check DOM directly
+                const container = document.getElementById('http-resp-container');
+                if (container) {
+                    log(`Container found: display=${container.style.display}, visible=${container.offsetHeight > 0}`, 'info');
+                } else {
+                    log('HTTP response container not found in this window', 'warning');
+                }
+
+            } catch (error) {
+                log(`Error debugging HTTP response: ${error.message}`, 'error');
+            }
+        }
+
+        function triggerHttpResponse() {
+            log('Attempting to force show HTTP response container...');
+            
+            try {
+                if (window.triggerHttpResponse) {
+                    log('Using global trigger function...', 'info');
+                    window.triggerHttpResponse();
+                } else if (window.app && window.app.triggerHttpResponseDisplay) {
+                    log('Using app trigger function...', 'info');
+                    window.app.triggerHttpResponseDisplay();
+                } else {
+                    log('Trigger function not available', 'error');
+                    log('Try opening browser console in your ZK-PRET app and run: triggerHttpResponse()', 'info');
+                }
+
+                // Try direct DOM manipulation
+                const container = document.getElementById('http-resp-container');
+                if (container) {
+                    container.style.display = 'block';
+                    log('Directly set container display to block', 'success');
+                } else {
+                    log('Cannot find container to manipulate', 'warning');
+                }
+
+            } catch (error) {
+                log(`Error triggering HTTP response: ${error.message}`, 'error');
+            }
+        }
+
+        function testExecution() {
+            log('Testing execution flow...');
+            
+            try {
+                // Check if we can simulate an execution
+                if (window.app) {
+                    log('App available, checking execution methods...', 'info');
+                    
+                    const methods = ['executeGLEIF', 'executeCorporateRegistration', 'executeEXIM'];
+                    methods.forEach(method => {
+                        if (window.app[method]) {
+                            log(`✓ ${method} method available`, 'success');
+                        } else {
+                            log(`✗ ${method} method not found`, 'warning');
+                        }
+                    });
+
+                    // Check if HTTP response data exists
+                    if (window.app.lastHttpResponseData) {
+                        log('HTTP response data exists:', 'success');
+                        log(JSON.stringify(window.app.lastHttpResponseData, null, 2));
+                    } else {
+                        log('No HTTP response data found', 'warning');
+                    }
+
+                } else {
+                    log('App not available for testing', 'error');
+                }
+
+            } catch (error) {
+                log(`Error testing execution: ${error.message}`, 'error');
+            }
+        }
+
+        // Auto-check on load
+        setTimeout(checkApp, 1000);
+
+        log('🐛 HTTP Response Debug Panel ready');
+        log('Click the buttons above to debug your HTTP response display issue');
+    </script>
+</body>
+</html>
