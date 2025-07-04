@@ -15,13 +15,6 @@
       "dest": "/public/index.html"
     }
   ],
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs20.x",
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  },
   "env": {
     "NODE_ENV": "production",
     "OPERATION_MODE": "HTTP",
