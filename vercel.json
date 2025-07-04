@@ -17,7 +17,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "runtime": "@vercel/node@20",
+      "runtime": "nodejs20.x",
       "memory": 1024,
       "maxDuration": 30
     }
