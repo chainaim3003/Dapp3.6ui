@@ -1,13 +1,6 @@
 {
   "version": 2,
   "name": "zk-pret-frontend",
-  "framework": null,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
